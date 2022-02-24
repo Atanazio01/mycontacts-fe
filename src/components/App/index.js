@@ -5,7 +5,6 @@ import GlobalStyles from '../../assets/styles/global';
 import defaultTheme from '../../assets/styles/themes/default';
 
 import Header from '../Header';
-import ContactsList from '../ContactsList';
 
 import { Container } from './styles';
 import Routes from '../../Routes';
@@ -15,7 +14,6 @@ const App = function () {
     <BrowserRouter>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />
-
         <Container>
           <Header />
           <Routes />
