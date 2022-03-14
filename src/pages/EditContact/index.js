@@ -1,3 +1,7 @@
+import PageHeader from '../../components/PageHeader';
+
 export default function EditContact() {
-  return 'Edit Contact';
+  return (
+    <PageHeader title="Editar Marcos Douglas" />
+  );
 }
