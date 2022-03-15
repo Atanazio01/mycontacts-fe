@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import Button from '../Button';
 import FormGroup from '../FormGroup';
@@ -9,41 +9,51 @@ import { Form, ButtonContainer } from './styles';
 
 export default function ContactForm({ buttonLabel }) {
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [category, setCategory] = useState('');
 
-  const emailInput = useRef(null);
-
-  function handleClick() {
-    console.log(emailInput.current.value);
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log({
+      name, email, phone, category,
+    });
   }
 
   return (
-    <Form>
-      <button type="button" onClick={handleClick}>
-        Loga emailInput
-      </button>
+    <Form onSubmit={(e) => handleSubmit(e)}>
       <FormGroup>
         <Input
-          value={name}
           placeholder="Nome"
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </FormGroup>
 
       <FormGroup>
         <Input
-          defaultValue="marcosdouglas@devacademy.com"
           placeholder="E-mail"
-          ref={emailInput}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </FormGroup>
 
       <FormGroup>
-        <Input placeholder="Telefone" />
+        <Input
+          placeholder="Telefone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
       </FormGroup>
 
       <FormGroup>
-        <Select>
-          <option value="instagram">Instagram</option>
+        <Select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="">Categoria</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Discord">Discord</option>
         </Select>
       </FormGroup>
 

@@ -6,7 +6,7 @@ export default function NewContact() {
   return (
     <>
       <PageHeader
-        itle="Novo contato"
+        title="Novo contato"
       />
       <ContactForm
         buttonLabel="Cadastrar"
