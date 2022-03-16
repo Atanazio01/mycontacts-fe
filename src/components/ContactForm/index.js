@@ -32,19 +32,17 @@ export default function ContactForm({ buttonLabel }) {
     setEmail(event.target.value);
 
     if (event.target.value && !isEmailValid(event.target.value)) {
-      setError({ field: 'email', message: 'E-mail é inválido' });
+      setError({ field: 'email', message: 'E-mail inválido' });
     } else {
       removeError('email');
     }
   }
 
-  console.log(getErrorMessageByFieldName('name'));
-
   function handleSubmit(e) {
     e.preventDefault();
-    console.log({
-      name, email, phone, category,
-    });
+    // console.log({
+    //   name, email, phone, category,
+    // });
   }
 
   return (
