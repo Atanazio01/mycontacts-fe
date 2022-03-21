@@ -51,3 +51,11 @@ export default function Home() {
     </Container>
   );
 }
+
+fetch('http://localhost:3001')
+  .then((response) => {
+    console.log('resposta', response);
+  })
+  .catch((error) => {
+    console.log('erro: ', error);
+  });
