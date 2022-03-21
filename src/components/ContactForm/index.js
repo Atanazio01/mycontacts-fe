@@ -9,6 +9,7 @@ import FormGroup from '../FormGroup';
 import Input from '../Input';
 import Select from '../Select';
 import { Form, ButtonContainer } from './styles';
+import formatPhone from '../../utils/formatPhone';
 
 export default function ContactForm({ buttonLabel }) {
   const [name, setName] = useState('');
@@ -38,11 +39,15 @@ export default function ContactForm({ buttonLabel }) {
     }
   }
 
+  function handlePhoneChange(event) {
+    setPhone(formatPhone(event.target.value));
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log({
-    //   name, email, phone, category,
-    // });
+    console.log({
+      name, email, phone, category,
+    });
   }
 
   return (
@@ -70,7 +75,8 @@ export default function ContactForm({ buttonLabel }) {
         <Input
           placeholder="Telefone"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(event) => handlePhoneChange(event)}
+          maxLength="15"
         />
       </FormGroup>
 
