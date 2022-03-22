@@ -52,14 +52,13 @@ export default function Home() {
   );
 }
 
-fetch('http://localhost:3001/categories', {
-  method: 'DELETE',
-  headers: new Headers({
-    'X-App-ID': '123',
-  }),
-})
-  .then((response) => {
+fetch('http://localhost:3001/contacts')
+  .then(async (response) => {
+    const json = await response.json();
     console.log('resposta', response);
+    json.forEach((contact) => {
+      console.log(contact.name);
+    });
   })
   .catch((error) => {
     console.log('erro: ', error);
