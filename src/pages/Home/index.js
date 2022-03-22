@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -9,6 +10,21 @@ import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 
 export default function Home() {
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/contacts')
+      .then(async (response) => {
+        const json = await response.json();
+        setContacts(json);
+      })
+      .catch((error) => {
+        console.log('erro: ', error);
+      });
+  }, []);
+
+  console.log(contacts);
+
   return (
     <Container>
       <InputSearchContainer>
@@ -51,18 +67,6 @@ export default function Home() {
     </Container>
   );
 }
-
-fetch('http://localhost:3001/contacts')
-  .then(async (response) => {
-    const json = await response.json();
-    console.log('resposta', response);
-    json.forEach((contact) => {
-      console.log(contact.name);
-    });
-  })
-  .catch((error) => {
-    console.log('erro: ', error);
-  });
 
 // SOP -> Same Origin Policy -> Política de mesma origem
 // CORS -> Cross-Origin Resource Sharing -> Compartilhamento de recursos entre origens cruzadas.
