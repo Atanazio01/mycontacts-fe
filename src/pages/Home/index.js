@@ -9,18 +9,25 @@ import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 
+import Loader from '../../components/Loader/index';
+
+import delay from '../../utils/delay';
+
 export default function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsloading] = useState(true);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
   )), [contacts, searchTerm]);
 
   useEffect(() => {
+    setIsloading(true);
     fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
       .then(async (response) => {
+        await delay(500);
         // parsear o body
         // Poderia usar response.json().then ao invés de async await.
         const json = await response.json();
@@ -28,6 +35,9 @@ export default function Home() {
       })
       .catch((error) => {
         console.log('erro: ', error);
+      })
+      .finally(() => {
+        setIsloading(false);
       });
   }, [orderBy]);
 
@@ -43,6 +53,8 @@ export default function Home() {
 
   return (
     <Container>
+      <Loader isLoading={isLoading} />
+
       <InputSearchContainer>
         <input
           value={searchTerm}
