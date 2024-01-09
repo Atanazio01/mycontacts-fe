@@ -14,7 +14,7 @@ export default createGlobalStyle`
     color: ${({ theme }) => theme.colors.gray[900]};
  }
 
-  button{
+  button {
     cursor: pointer;
   }
 `;
