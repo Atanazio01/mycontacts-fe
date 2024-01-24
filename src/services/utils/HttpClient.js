@@ -6,12 +6,17 @@ class HttpClient {
   }
 
   async get(path) {
+    await delay(500);
+
     const response = await fetch(`${this.baseUrl}${path}`);
 
-    await delay(500);
+    if (response.ok) {
+      return response.json();
+    }
+
+    throw new Error(`${response.status} - ${response.statusText}`);
     // parsear o body
     // Poderia usar response.json().then ao invés de async await.
-    return response.json();
   }
 }
 
