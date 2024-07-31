@@ -50,8 +50,8 @@ export default function ContactForm({ buttonLabel }) {
     setPhone(formatPhone(event.target.value));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
   }
 
   return (
