@@ -40,13 +40,13 @@ export default function Home() {
     try {
       setIsloading(true);
 
-      // const contactsList = await ContactsService.listContacts(orderBy);
-      const contactsList = []; await ContactsService.listContacts(orderBy);
+      const contactsList = await ContactsService.listContacts(orderBy);
 
       setHasError(false);
       setContacts(contactsList);
     } catch {
       setHasError(true);
+      setContacts([]);
     } finally {
       setIsloading(false);
     }
@@ -67,8 +67,6 @@ export default function Home() {
   function handleTryAgain() {
     loadContacts();
   }
-
-  console.log(contacts, !hasError && contacts.lenght > 0);
 
   return (
     <Container>
@@ -105,7 +103,7 @@ export default function Home() {
         <Link to="/new">Novo contato</Link>
       </Header>
 
-      {hasError && (
+      {(hasError && !isLoading) && (
         <ErrorContainer>
           <img src={sad} alt="Sad" />
           <div className="details">
@@ -120,7 +118,7 @@ export default function Home() {
       {!hasError && (
         <>
           {
-            contacts.length < 1 && (
+            (contacts.length < 1 && !isLoading) && (
               <EmptyListContainer>
                 <img src={emptyBox} alt="Empty box" />
                 <p>
