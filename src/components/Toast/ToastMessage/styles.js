@@ -5,10 +5,10 @@ const containerVariants = {
     background: ${({ theme }) => theme.colors.primary.main};
     `,
   danger: css`
-    background: ${({ theme }) => theme.colors.success.main};
+    background: ${({ theme }) => theme.colors.danger.main};
   `,
   success: css`
-    background: ${({ theme }) => theme.colors.danger.main};
+    background: ${({ theme }) => theme.colors.success.main};
     `,
 };
 
@@ -27,7 +27,7 @@ export const Container = styled.div`
     margin-top: 12px;
   }
 
-  strong {
-    margin-left: 8px;
+  img {
+    margin-right: 8px;
   }
 `;
