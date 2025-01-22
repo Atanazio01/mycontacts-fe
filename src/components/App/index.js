@@ -8,12 +8,14 @@ import Header from '../Header';
 
 import { Container } from './styles';
 import Routes from '../../Routes';
+import ToastContainer from '../Toast/ToastContainer';
 
 const App = function () {
   return (
     <BrowserRouter>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />
+        <ToastContainer />
         <Container>
           <Header />
           <Routes />
