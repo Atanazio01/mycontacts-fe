@@ -5,11 +5,7 @@ import ToastMessage from '../ToastMessage';
 import { toastEventManager } from '../../../utils/toast';
 
 export default function ToastContainer() {
-  const [messages, setMessages] = useState([/*
-    { id: Math.random(), type: 'default', text: 'Default text' },
-    { id: Math.random(), type: 'danger', text: 'Danger text' },
-    { id: Math.random(), type: 'success', text: 'Success text' },
-   */]);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     function handleAddToast({ type, text }) {
@@ -26,13 +22,17 @@ export default function ToastContainer() {
     };
   }, []);
 
+  function handleRemoveMessage(id) {
+    setMessages((prevState) => prevState.filter((message) => message.id !== id));
+  }
+
   return (
     <Container>
       {messages.map((message) => (
         <ToastMessage
           key={message.id}
-          type={message.type}
-          text={message.text}
+          message={message}
+          onRemoveMessage={(messageId) => handleRemoveMessage(messageId)}
         />
       ))}
     </Container>
