@@ -24,6 +24,7 @@ import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import Loader from '../../components/Loader/index';
 import ContactsService from '../../services/ContactsService';
 import Button from '../../components/Button';
+import Modal from '../../components/Modal';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -73,6 +74,17 @@ export default function Home() {
   return (
     <Container>
       <Loader isLoading={isLoading} />
+
+      <Modal
+        danger
+        title="Tem certeza que seseja remover o contato ´´Marcos Douglas´´"
+        confirmLabel="Deletar"
+        onCancel={() => alert('Cancelou')}
+        onConfirm={() => alert('Confirmou')}
+      >
+        <h1>sdaasdd</h1>
+        <h2>adasdasd</h2>
+      </Modal>
 
       {contacts.length > 0 && (
         <InputSearchContainer>
@@ -128,12 +140,13 @@ export default function Home() {
             </EmptyListContainer>
           )}
 
-          {(contacts.length > 0 && filteredContacts.length < 1) && (
+          {contacts.length > 0 && filteredContacts.length < 1 && (
             <SearchNotFoundContainer>
               <img src={magnifierQuestion} alt="Magnifier Question" />
 
               <span>
-                Nenhum resultado foi encontrado para <strong>{searchTerm}</strong>.
+                Nenhum resultado foi encontrado para{' '}
+                <strong>{searchTerm}</strong>.
               </span>
             </SearchNotFoundContainer>
           )}
