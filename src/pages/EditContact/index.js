@@ -9,6 +9,7 @@ import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
 
 export default function EditContact() {
+  const [contact, setContact] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const history = useHistory();
@@ -18,7 +19,7 @@ export default function EditContact() {
     async function loadContact() {
       try {
         const contactData = await ContactsService.getContactById(id);
-        console.log(contactData);
+        setContact(contactData);
         setIsLoading(false);
       } catch {
         history.push('/');
@@ -42,8 +43,10 @@ export default function EditContact() {
       <PageHeader title="Editar Marcos Douglas" />
 
       <ContactForm
+        key={contact.id}
         buttonLabel="Salvar alterações"
         onSubmit={() => handleSubmit}
+        contact={contact}
       />
     </>
   );
