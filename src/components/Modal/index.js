@@ -7,13 +7,14 @@ import Button from '../Button';
 
 export default function Modal({
   danger,
+  visible,
+  isLoading,
   title,
   children,
   cancelLabel,
   confirmLabel,
   onCancel,
   onConfirm,
-  visible,
 }) {
   if (!visible) {
     return null;
@@ -24,10 +25,20 @@ export default function Modal({
         <h1>{title}</h1>
         <div className="modal-body">{children}</div>
         <Footer>
-          <button onClick={onCancel} type="button" className="cancel-button">
+          <button
+            disabled={isLoading}
+            onClick={onCancel}
+            type="button"
+            className="cancel-button"
+          >
             {cancelLabel}
           </button>
-          <Button onClick={onConfirm} type="button" danger={danger}>
+          <Button
+            onClick={onConfirm}
+            type="button"
+            danger={danger}
+            isLoading={isLoading}
+          >
             {confirmLabel}
           </Button>
         </Footer>
@@ -39,17 +50,19 @@ export default function Modal({
 
 Modal.propTypes = {
   danger: PropTypes.bool,
+  visible: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   cancelLabel: PropTypes.string,
   confirmLabel: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired,
-  visible: PropTypes.bool.isRequired,
 };
 
 Modal.defaultProps = {
   danger: false,
+  isLoading: false,
   cancelLabel: 'Cancelar',
   confirmLabel: 'Confirmar',
 };

@@ -26,6 +26,8 @@ import ContactsService from '../../services/ContactsService';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 
+import toast from '../../utils/toast';
+
 export default function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
@@ -34,6 +36,7 @@ export default function Home() {
   const [hasError, setHasError] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [contactBeingDeleted, setContactBeingDeleted] = useState(null);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
 
   const filteredContacts = useMemo(
     // eslint-disable-next-line max-len
@@ -80,20 +83,32 @@ export default function Home() {
 
   function handleCloseDeleteModal() {
     setIsDeleteModalVisible(false);
+    setContactBeingDeleted(null);
   }
 
   async function handleConfirmDeleteContact() {
-    if (!contactBeingDeleted) return;
-
     try {
+      setIsLoadingDelete(true);
+
       await ContactsService.deleteContact(contactBeingDeleted.id);
+
       setContacts((prevState) => prevState.filter(
         (contact) => contact.id !== contactBeingDeleted.id,
       ));
-      setContactBeingDeleted(null);
-      setIsDeleteModalVisible(false);
+
+      handleCloseDeleteModal();
+
+      toast({
+        type: 'success',
+        text: 'Contato deletado com sucesso!',
+      });
     } catch {
-      alert('Erro ao deletar contato');
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao deletar contato!',
+      });
+    } finally {
+      setIsLoadingDelete(false);
     }
   }
 
@@ -102,8 +117,9 @@ export default function Home() {
       <Loader isLoading={isLoading} />
 
       <Modal
-        visible={isDeleteModalVisible}
         danger
+        visible={isDeleteModalVisible}
+        isLoading={isLoadingDelete}
         title={`Tem certeza que deseja remover o contato "${contactBeingDeleted?.name}"?`}
         confirmLabel="Deletar"
         onCancel={handleCloseDeleteModal}
