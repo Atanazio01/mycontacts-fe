@@ -19,15 +19,15 @@ class CategoriesService {
   }
 
   async createCategory(name) {
-    const category = await this.HttpClient.post('/categories', { body: { name } });
+    const categoryData = CategoryMapper.toPersistence({ name });
 
-    return CategoryMapper.toDomain(category);
+    return this.HttpClient.post('/categories', { body: categoryData });
   }
 
   async updateCategory(id, name) {
-    const category = await this.HttpClient.put(`/categories/${id}`, { body: { name } });
+    const categoryData = CategoryMapper.toPersistence({ name });
 
-    return CategoryMapper.toDomain(category);
+    return this.HttpClient.put(`/categories/${id}`, { body: categoryData });
   }
 
   deleteCategory(id) {
