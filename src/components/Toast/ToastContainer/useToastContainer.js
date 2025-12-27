@@ -5,7 +5,7 @@ import useAnimatedList from '../../../hooks/useAnimatedList';
 export default function useToastContainer() {
   const {
     items: messages, setItems: setMessages,
-    pendingRemovalItemsIds, handleRemoveItem, handleAnimationEnd,
+    pendingRemovalItemsIds, handleRemoveItem, handleAnimationEnd, renderList,
   } = useAnimatedList();
 
   useEffect(() => {
@@ -33,5 +33,6 @@ export default function useToastContainer() {
     handleRemoveItem,
     pendingRemovalItemsIds,
     handleAnimationEnd,
+    renderList,
   };
 }
