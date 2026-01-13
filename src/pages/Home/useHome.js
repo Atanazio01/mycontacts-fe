@@ -1,25 +1,25 @@
-import { useEffect, useState, useCallback, useTransition, use } from "react";
+import { useEffect, useState, useCallback, useMemo, useDeferredValue } from "react";
 import ContactsService from "../../services/ContactsService";
 import toast from "../../utils/toast";
 
 export default function useHome() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState("asc");
-  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsloading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [contactBeingDeleted, setContactBeingDeleted] = useState(null);
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);
-  const [filteredContacts, setFilteredContacts] = useState([]);
 
-  const [isPending, startTransition] = useTransition();
+  const [searchTerm, setSearchTerm] = useState("");
 
-  /* const filteredContacts = useMemo(
+  const deferredSearchTerm = useDeferredValue(searchTerm);
+
+  const filteredContacts = useMemo(
     // eslint-disable-next-line max-len
-    () => contacts.filter((contact) => contact.name.toLowerCase().includes(searchTerm.toLowerCase())),
-    [contacts, searchTerm],
-  ); */
+    () => contacts.filter((contact) => contact.name.toLowerCase().includes(deferredSearchTerm.toLowerCase())),
+    [contacts, deferredSearchTerm],
+  );
 
   const loadContacts = useCallback(async () => {
     try {
@@ -29,7 +29,6 @@ export default function useHome() {
 
       setHasError(false);
       setContacts(contactsList);
-      setFilteredContacts(contactsList);
     } catch {
       setHasError(true);
       setContacts([]);
@@ -47,17 +46,7 @@ export default function useHome() {
   }, []);
 
   function handleChangeSearchTerm(event) {
-    const { value } = event.target;
-
-    setSearchTerm(value);
-
-    startTransition(() => {
-      setFilteredContacts(
-        contacts.filter((contact) =>
-          contact.name.toLowerCase().includes(value.toLowerCase())
-        )
-      );
-    });
+    setSearchTerm(event.target.value);
   }
 
   function handleTryAgain() {
@@ -100,7 +89,6 @@ export default function useHome() {
   }
 
   return {
-    isPending,
     orderBy,
     contacts,
     filteredContacts,
