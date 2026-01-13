@@ -70,6 +70,7 @@ export default function Home() {
             visible={isDeleteModalVisible}
             isLoading={isLoadingDelete}
             title={`Tem certeza que deseja remover o contato "${contactBeingDeleted?.name}"?`}
+            cancelLabel="Cancelar"
             confirmLabel="Deletar"
             onCancel={handleCloseDeleteModal}
             onConfirm={handleConfirmDeleteContact}

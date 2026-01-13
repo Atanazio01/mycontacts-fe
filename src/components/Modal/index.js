@@ -25,8 +25,8 @@ export default function Modal({
 
   return (
     <ReactPortal containerId="modal-root">
-      <Overlay isLeaving={!visible} ref={animatedElementRef}>
-        <Container danger={danger} isLeaving={!visible}>
+      <Overlay $isLeaving={!visible} ref={animatedElementRef}>
+        <Container $danger={danger} $isLeaving={!visible}>
           <h1>{title}</h1>
           <div className="modal-body">{children}</div>
           <Footer>
@@ -41,7 +41,7 @@ export default function Modal({
             <Button
               onClick={onConfirm}
               type="button"
-              danger={danger}
+              $danger={danger}
               isLoading={isLoading}
             >
               {confirmLabel}

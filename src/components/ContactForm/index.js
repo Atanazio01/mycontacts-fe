@@ -32,7 +32,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     <Form onSubmit={(event) => handleSubmit(event)} noValidate>
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
-          error={getErrorMessageByFieldName('name')}
+          $error={getErrorMessageByFieldName('name')}
           placeholder="Nome *"
           value={name}
           onChange={(event) => handleNameChange(event)}
@@ -43,7 +43,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       <FormGroup error={getErrorMessageByFieldName('email')}>
         <Input
           type="email"
-          error={getErrorMessageByFieldName('email')}
+          $error={getErrorMessageByFieldName('email')}
           placeholder="E-mail"
           value={email}
           onChange={(event) => handleEmailChange(event)}
