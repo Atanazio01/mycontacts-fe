@@ -23,4 +23,6 @@ class ContactMapper {
   }
 }
 
-export default new ContactMapper();
+const contactMapper = new ContactMapper();
+
+export default contactMapper;

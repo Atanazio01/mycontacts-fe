@@ -11,7 +11,7 @@ export default function Header({ hasError, qtyOfContacts, qtyOfFilteredContacts 
       : 'center';
 
   return (
-    <Container justifyContent={alignment}>
+    <Container $justifyContent={alignment}>
       {!hasError && qtyOfContacts > 0 && (
         <strong>
           {qtyOfFilteredContacts}

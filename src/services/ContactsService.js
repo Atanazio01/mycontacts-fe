@@ -35,4 +35,6 @@ class ContactsService {
   }
 }
 
-export default new ContactsService();
+const contactsService = new ContactsService();
+
+export default contactsService;
