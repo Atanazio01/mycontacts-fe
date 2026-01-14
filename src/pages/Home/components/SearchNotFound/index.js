@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-one-expression-per-line */
+ 
 
 import PropTypes from 'prop-types';
 import { Container } from './styles';

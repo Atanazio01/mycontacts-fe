@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Container } from './styles';
 
 export default function Header({ hasError, qtyOfContacts, qtyOfFilteredContacts }) {
-  // eslint-disable-next-line no-nested-ternary
+   
   const alignment = hasError
     ? 'flex-end'
     : qtyOfContacts > 0

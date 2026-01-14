@@ -16,7 +16,7 @@ export default function useHome() {
   const deferredSearchTerm = useDeferredValue(searchTerm);
 
   const filteredContacts = useMemo(
-    // eslint-disable-next-line max-len
+     
     () => contacts.filter((contact) => contact.name.toLowerCase().includes(deferredSearchTerm.toLowerCase())),
     [contacts, deferredSearchTerm],
   );

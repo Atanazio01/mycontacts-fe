@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-one-expression-per-line */
+ 
 
 import { Container } from './styles';
 import emptyBox from '../../../../assets/images/empty-box.svg';

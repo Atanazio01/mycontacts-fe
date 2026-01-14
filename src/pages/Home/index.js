@@ -1,4 +1,4 @@
-/* eslint-disable no-nested-ternary */
+ 
 
 import { Container } from './styles';
 

@@ -90,6 +90,8 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   );
 });
 
+ContactForm.displayName = 'ContactForm';
+
 ContactForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
