@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import Header from "../Header";
 
 import { Container } from "./styles";
-import Routes from "../../Routes";
+import Router from "../../Router";
 import ToastContainer from "../Toast/ToastContainer";
 
 const App = function () {
@@ -12,7 +12,7 @@ const App = function () {
       <ToastContainer />
       <Container>
         <Header />
-        <Routes />
+        <Router />
       </Container>
     </BrowserRouter>
   );
